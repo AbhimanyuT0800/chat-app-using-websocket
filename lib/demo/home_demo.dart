@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class HomePageDemo extends StatefulWidget {
-  const HomePageDemo({super.key, required this.channel});
+  const HomePageDemo({Key? key, required this.channel}) : super(key: key);
   final WebSocketChannel channel;
 
   @override

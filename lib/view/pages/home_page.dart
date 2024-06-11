@@ -1,15 +1,21 @@
 import 'package:chat_using_websocket/core/utils/dynamic_sizes.dart';
+import 'package:chat_using_websocket/services/auth_services.dart';
 import 'package:chat_using_websocket/view/pages/chat_details_page.dart';
 import 'package:flutter/material.dart';
 
 // chat list home page
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                AuthServices.userLogOut();
+              },
+              icon: Icon(Icons.logout)),
           title: const Text(
             'Chat',
             style: TextStyle(

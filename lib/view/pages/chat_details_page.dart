@@ -1,107 +1,58 @@
 import 'dart:math';
 
+import 'package:chat_using_websocket/core/theme/app_color_pallettes.dart';
+import 'package:chat_using_websocket/core/theme/app_theme.dart';
 import 'package:chat_using_websocket/core/utils/dynamic_sizes.dart';
+import 'package:chat_using_websocket/view/widgets/recived_message_widget.dart';
+import 'package:chat_using_websocket/view/widgets/sent_message_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChatDetailsPage extends StatelessWidget {
-  const ChatDetailsPage({super.key});
+  const ChatDetailsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // controller for input message
+    final TextEditingController textController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: context.screenHeight(70),
-        backgroundColor: Colors.amber,
-        title: Row(
-          children: [
-            Padding(
-                padding: EdgeInsets.only(right: context.screenWidth(20)),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.chevron_left_sharp,
-                      size: context.screenWidth(40),
-                    ),),),
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //TODO fetch user name and online status
-                Text(
-                  'amal',
-                ),
-                Text(
-                  'online',
-                  style: TextStyle(fontSize: 15),
-                ),
-              ],
-            ),
-          ],
+        backgroundColor: AppColorPalettes.blue,
+        centerTitle: true,
+        title: Text(
+          'Chat Room',
+          style: context.typography.h2SemiBold
+              .copyWith(color: AppColorPalettes.white500),
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: context.screenWidth(20),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: context.screenHeight(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Spacer(),
-            Padding(
-              padding: EdgeInsets.only(left: context.screenWidth(15)),
-              child: Container(
-                width: max(0, context.screenWidth(300)),
-                padding: EdgeInsets.all(context.screenWidth(10)),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(context.screenHeight(20)),
-                        topLeft: Radius.circular(context.screenHeight(20)),
-                        topRight: Radius.circular(context.screenHeight(20))),
-                    color: Colors.grey),
-                // recevied message
-                child: Text(
-                  'messageafasfnajfhkhbnvnbvnbnbjhbjjhbjh',
-                ),
-              ),
+            // Recived message
+            RecivedMessageWidget(
+              message: 'asasdad',
             ),
-            Row(
-              children: [
-                Spacer(),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: context.screenWidth(15),
-                      top: context.screenWidth(15)),
-                  child: Container(
-                    width: max(0, context.screenWidth(300)),
-                    padding: EdgeInsets.all(context.screenWidth(10)),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomRight:
-                                Radius.circular(context.screenHeight(20)),
-                            topLeft: Radius.circular(context.screenHeight(20)),
-                            topRight:
-                                Radius.circular(context.screenHeight(20))),
-                        color: Colors.grey),
-                    // recevied message
-                    child: Text(
-                      'messageafasfnajfhkhbnvnbvnbnbjhbjjhbjh',
-                    ),
-                  ),
-                ),
-              ],
+            SentMessageWidget(
+              message: 'ads',
             ),
             Padding(
-              padding: EdgeInsets.only(top: context.screenHeight(10)),
+              padding: EdgeInsets.only(
+                  top: context.screenHeight(10),
+                  bottom: context.screenHeight(20)),
               child: TextField(
-                // controller: controller,
+                controller: textController,
                 decoration: InputDecoration(
                   hintText: "Enter your text",
-                  // hintStyle: context.typography.body,
-                  contentPadding: EdgeInsets.symmetric(vertical: 20),
+                  hintStyle: context.typography.body,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: context.screenHeight(20)),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: BorderSide(color: AppColorPalettes.black500),
                     borderRadius:
                         BorderRadius.circular(context.screenHeight(20)),
                   ),
