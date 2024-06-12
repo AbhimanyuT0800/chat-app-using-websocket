@@ -15,7 +15,7 @@ class SentMessageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Spacer(),
+        const Spacer(),
         Padding(
           padding: EdgeInsets.only(
               left: context.screenWidth(15), top: context.screenWidth(15)),
