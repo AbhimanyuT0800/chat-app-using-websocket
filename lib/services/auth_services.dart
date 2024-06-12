@@ -1,26 +1,27 @@
 import 'package:chat_using_websocket/core/exception/auth_exceptions/auth_exception.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// authantication services
 class AuthServices {
   static final auth = FirebaseAuth.instance;
-  final db = FirebaseFirestore.instance;
 
+// auth status updates
   static Stream<User?> authStatus() => auth.authStateChanges();
 
+// new user sign in
   static Future<void> userSigninWithEmail(
       {required String email,
       required String pass,
       required String userName}) async {
     try {
       await auth.createUserWithEmailAndPassword(email: email, password: pass);
-      auth.currentUser?.updateDisplayName(userName);
+      await auth.currentUser?.updateDisplayName(userName);
     } on FirebaseAuthException catch (e) {
       throw AuthException(error: e.message);
     }
   }
 
+// already have an account user login
   static Future<UserCredential> userLoginWithEmail(
       {required String email, required String password}) async {
     try {
@@ -30,9 +31,8 @@ class AuthServices {
     }
   }
 
+// user log out
   static Future<void> userLogOut() async {
     await auth.signOut();
   }
 }
-
-final verificationIdProvider = StateProvider<String?>((ref) => null);
